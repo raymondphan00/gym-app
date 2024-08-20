@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SectionWrapper from './SectionWrapper'
 import { SCHEMES, WORKOUTS } from '../utils/swoldier'
+import Button from './Button'
 
 
 //Nested Component for the Header with styling
@@ -18,14 +19,9 @@ function Header(props) {
 }
 
 //Creates the Generator Component and maps out the WORKOUTS from the swoldier.js file and renders each button
-export default function Generator() {
-
-
+export default function Generator(props) {
+    const { poison, setPoison, goal, setGoal, muscles, setMuscles, updateWorkout } = props
     const [showModal, setShowModal] = useState(false)
-    const [poison, setPoison] = useState('individual')
-    const [muscles, setMuscles] = useState([])
-    const [goal, setGoal] = useState('strength_power')
-
 
     // let showModal = false;
 
@@ -58,7 +54,7 @@ export default function Generator() {
     }
 
     return (
-        <SectionWrapper header={"generate your workout"} title={['It\'s', 'Huge', 'o\'clock']}>
+        <SectionWrapper id={'generate'} header={"generate your workout"} title={['It\'s', 'Huge', 'o\'clock']}>
 
             {/**
              * Creates the Pick the Poison Section and maps out WORKOUTS from swoldier.js
@@ -70,7 +66,7 @@ export default function Generator() {
                         <button onClick={() => {
                             setMuscles([])
                             setPoison(type)
-                        }} className={'bg-slate-950 border py-3 rounded-lg duration-200 hover:border-blue-600 ' + (type === poison ? 'border-blue-600': 'border-blue-400')} key={typeIndex}>
+                        }} className={'bg-slate-950 border py-3 px-4 rounded-lg duration-200 hover:border-blue-600 ' + (type === poison ? 'border-blue-600': 'border-blue-400')} key={typeIndex}>
                             <p className='capitalize'>{type.replaceAll('_',' ')}</p>
                         </button>
                     )
@@ -101,32 +97,18 @@ export default function Generator() {
 
 
             <Header index={"03"} title={"Become Juggernaut"} description={"Select your ultimate objective."} />  
-            <div className='grid grid-cols-3 sm:grid-cols-3 gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-3 sm:grid-cols-3 gap-4'>
                 {Object.keys(SCHEMES).map((scheme, schemeIndex) => {
                     return (
                         <button onClick={() => {
                             setGoal(scheme)
-                        }} className={'bg-slate-950 border py-3 rounded-lg duration-200 hover:border-blue-600 ' + (scheme === goal ? 'border-blue-600': 'border-blue-400')} key={schemeIndex}>
+                        }} className={'bg-slate-950 border py-3 px-4 rounded-lg duration-200 hover:border-blue-600 ' + (scheme === goal ? 'border-blue-600': 'border-blue-400')} key={schemeIndex}>
                             <p className='capitalize'>{scheme.replaceAll('_',' ')}</p>
                         </button>
                     )
                 })}
             </div>
-
-
-            <Header index={"04"} title={"Lock on targets"} description={"Select the muscles judged for annihilation"} />  
-            <div className='bg-slate-950 border border-solid border-blue-400 rounded-lg flex flex-col'>
-                <button onClick={toggleModal} className='relative p-3 flex items-center justify-center'>
-                    <p>Select muscle groups</p>
-                    <i className="fa-solid absolute right-3 top-1/2 -translate-y-1/2 fa-caret-down"></i>
-                </button>
-                {showModal && (
-                    <div>Modal</div>
-                )}
-            </div>
-            
-
-
+            <Button func={updateWorkout} text={"Formulate"}></Button>
         </SectionWrapper>
     )
 }
