@@ -1,5 +1,6 @@
 import React from 'react'
 
+//Section Wrapper to encapsulate the Generate an Danger Zone Section
 export default function SectionWrapper(props) {
     const { children, header, title, id } = props
     return (

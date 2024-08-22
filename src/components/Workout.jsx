@@ -2,6 +2,7 @@ import React from 'react'
 import SectionWrapper from './SectionWrapper'
 import ExerciseCard from './ExerciseCard'
 
+//Danger Zone Banner
 export default function Workout(props) {
     const { workout } = props
     return (

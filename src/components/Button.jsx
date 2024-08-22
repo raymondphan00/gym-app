@@ -1,5 +1,6 @@
 import React from 'react'
 
+//Custom Button and styling for Begin and Formulate buttons
 export default function Button(props) {
     const { text, func } = props
 

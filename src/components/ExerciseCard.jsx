@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 
+
+//Exercise Card that includes Name of the Exercise, Muscle Group, Description, Reps, Rest, Tempo, and number of Sets
 export default function ExerciseCard(props) {
     const { exercise, index } = props
     
@@ -11,6 +13,7 @@ export default function ExerciseCard(props) {
 
 
     return (
+        //Handles Card Number, Title, Type of exercise, and focus group
         <div className='p-4 rounded-md flex flex-col gap-4 bg-slate-950 sm:flex-wrap'>
             <div className='flex flex-col sm:flex-row sm:items-center sm:flex-wrap gap-x-4'>
                 <h4 className='text-3xl hidden sm:inline sm:text-4xl md:text-5xl font-semibold text-slate-400'>
@@ -23,7 +26,10 @@ export default function ExerciseCard(props) {
                 <h3 className='text-slate-400 text-sm'>Muscle Groups</h3>
                 <p className='capitalize'>{exercise.muscles.join(' & ')}</p>
             </div>
-
+            
+            {/**
+             * Description Section of the exercise card
+             */}
             <div className='flex flex-col bg-slate-950 rounded gap-2 '>
                 {exercise.description.split('___').map((val, key) => {
                     return (
@@ -34,6 +40,9 @@ export default function ExerciseCard(props) {
                 })}
             </div>
 
+            {/**
+             * Handles reps, rest, tempo, and sets compleleted
+             */}
             <div className='grid grid-cols-2 sm:grid-cols-4 sm:place-items-center gap-2'>
                 {['reps', 'rest', 'tempo'].map(info => {
                     return (
@@ -49,6 +58,6 @@ export default function ExerciseCard(props) {
                     <p className='font-medium'> {completedSets} / 5 </p>
                 </button>
             </div>
-    </div>
-  )
+        </div>
+    )
 }
