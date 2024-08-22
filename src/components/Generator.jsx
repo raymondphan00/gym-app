@@ -20,7 +20,7 @@ function Header(props) {
 
 //Creates the Generator Component and maps out the WORKOUTS from the swoldier.js file and renders each button
 export default function Generator(props) {
-    const { poison, setPoison, goal, setGoal, muscles, setMuscles, updateWorkout } = props
+    const { plan, setplan, goal, setGoal, muscles, setMuscles, updateWorkout } = props
     const [showModal, setShowModal] = useState(false)
 
     // let showModal = false;
@@ -40,7 +40,7 @@ export default function Generator(props) {
             return
         }
 
-        if (poison !== 'individual') {
+        if (plan !== 'individual') {
             setMuscles([muscleGroup])
             setShowModal(false)
             return
@@ -57,23 +57,26 @@ export default function Generator(props) {
         <SectionWrapper id={'generate'} header={"generate your workout"} title={['It\'s', 'Huge', 'o\'clock']}>
 
             {/**
-             * Creates the Pick the Poison Section and maps out WORKOUTS from swoldier.js
+             * Creates the Pick your plan Section and maps out WORKOUTS from swoldier.js
              */}
-            <Header index={"01"} title={"Pick your poison"} description={"Select the workout you wish to endure."} />  
+            <Header index={"01"} title={"Pick your plan"} description={"Select the plan."} />  
             <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
                 {Object.keys(WORKOUTS).map((type, typeIndex) => {
                     return (
                         <button onClick={() => {
                             setMuscles([])
-                            setPoison(type)
-                        }} className={'bg-slate-950 border py-3 px-4 rounded-lg duration-200 hover:border-blue-600 ' + (type === poison ? 'border-blue-600': 'border-blue-400')} key={typeIndex}>
+                            setplan(type)
+                        }} className={'bg-slate-950 border py-3 px-4 rounded-lg duration-200 hover:border-blue-600 ' + (type === plan ? 'border-blue-600': 'border-blue-400')} key={typeIndex}>
                             <p className='capitalize'>{type.replaceAll('_',' ')}</p>
                         </button>
                     )
                 })}
             </div>
 
-            <Header index={"02"} title={"Lock on targets"} description={"Select the muscles judged for annihilation."} />  
+            {/**
+             * Creates the Lock on targets section and selecting muscle groups
+             */}
+            <Header index={"02"} title={"Lock on targets"} description={"Select your focus."} />  
             <div className='bg-slate-950 border border-solid border-blue-400 rounded-lg flex flex-col'>
                 <button onClick={toggleModal} className='relative p-3 flex items-center justify-center'>
                     <p className='capitalize'>{muscles.length == 0 ? 'Select muscle groups' : muscles.join(' ')}</p>
@@ -82,7 +85,7 @@ export default function Generator(props) {
 
                 {showModal && (
                     <div className='flex flex-col px-3 pb-3'>
-                        {(poison === 'individual' ? WORKOUTS[poison] : Object.keys(WORKOUTS[poison])).map((muscleGroup, muscleGroupIndex) => {
+                        {(plan === 'individual' ? WORKOUTS[plan] : Object.keys(WORKOUTS[plan])).map((muscleGroup, muscleGroupIndex) => {
                             return (
                                 <button onClick={() => {
                                     updateMuscles(muscleGroup)
@@ -96,7 +99,7 @@ export default function Generator(props) {
             </div>
 
 
-            <Header index={"03"} title={"Become Juggernaut"} description={"Select your ultimate objective."} />  
+            <Header index={"03"} title={"Become Juggernaut"} description={"Select your objective."} />  
             <div className='grid grid-cols-1 sm:grid-cols-3 sm:grid-cols-3 gap-4'>
                 {Object.keys(SCHEMES).map((scheme, schemeIndex) => {
                     return (

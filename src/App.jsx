@@ -10,7 +10,7 @@ import { generateWorkout } from './utils/functions'
 
 function App() {
     const [workout, setWorkout] = useState(null)
-    const [poison, setPoison] = useState('individual')
+    const [plan, setplan] = useState('individual')
     const [muscles, setMuscles] = useState([])
     const [goal, setGoal] = useState('strength_power')
 
@@ -18,7 +18,7 @@ function App() {
         if (muscles.length < 0) {
             return
         }
-        let newWorkout = generateWorkout({poison, muscles, goal})
+        let newWorkout = generateWorkout({plan, muscles, goal})
         setWorkout(newWorkout)
 
         window.location.href = '#workout'
@@ -29,8 +29,8 @@ function App() {
         <main className='min-h-screen flex flex-col bg-gradient-to-r from-slate-800 to-slate-950 text-white text-sm sm:text-base'>
         <Hero />
         <Generator 
-            poison={poison} 
-            setPoison={setPoison}
+            plan={plan} 
+            setplan={setplan}
             goal={goal}
             setGoal={setGoal}
             muscles={muscles}
